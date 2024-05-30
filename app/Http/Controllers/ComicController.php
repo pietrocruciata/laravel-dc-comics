@@ -25,8 +25,37 @@ class ComicController extends Controller
         return view('comics.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dump('Metodo store');
+
+        $form_data = $request->all();
+
+        $new_comic = Comic::create($form_data);
+
+        return to_route('comics.show', $new_comic);
+
+    }
+
+    public function edit(Comic $comic)
+    {
+        return view('comics.edit', compact('comic'));
+    }
+
+    public function update(Request $request, Comic $comic)
+    {
+        $form_data = $request->all();
+   
+        $comic->fill($form_data); 
+        $comic->save();
+       
+        return to_route('comic.show', $comic);
+    }
+
+    public function destroy(Comic $comic)
+    {
+
+        $comic->delete();
+
+        return to_route('comics.index');
     }
 }
