@@ -48,7 +48,7 @@ class ComicController extends Controller
         $comic->fill($form_data); 
         $comic->save();
        
-        return to_route('comic.show', $comic);
+        return to_route('comics.show', $comic);
     }
 
     public function destroy(Comic $comic)
